@@ -70,7 +70,7 @@ app.post('/calculateRisk', (req, res) => {
         riskCategory = 'uninsurable';
     }
 
-    // Send the result back to the client
+    // Sends back tot he client
     res.json({ riskScore, riskCategory });
 });
 
