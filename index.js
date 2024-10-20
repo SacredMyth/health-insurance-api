@@ -3,10 +3,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(bodyParser.json());
+const allowedOrigins = ['https://salmon-mud-0a1019c10.5.azurestaticapps.net/'];
+
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true,
+}));
 
 // this will handle the scores
 app.post('/calculateRisk', (req, res) => {
