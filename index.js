@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const allowedOrigins = ['https://salmon-mud-0a1019c10.5.azurestaticapps.net/'];
+const allowedOrigins = ['https://salmon-mud-0a1019c10.5.azurestaticapps.net'];
 
 app.use(cors({
     origin: allowedOrigins,
