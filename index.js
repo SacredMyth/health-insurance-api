@@ -10,9 +10,12 @@ app.use(bodyParser.json());
 
 // this will handle the scores
 app.post('/calculateRisk', (req, res) => {
-    const { age, bmi, bloodPressure, familyHistory } = req.body;
-
+    const { age, heightFeet, heightInches, weight, bloodPressure, familyHistory } = req.body;
+    
+    //set variables
     let riskScore = 0;
+    const heightInMeters = (heightFeet * 12 + heightInches) * 0.0254;
+    const bmi = weight / (heightInMeters * heightInMeters);
 
     // Age Risk Calculation
     if (age < 30) {
