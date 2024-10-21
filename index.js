@@ -4,18 +4,21 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000
-//const allowedOrigins = ['https://salmon-mud-0a1019c10.5.azurestaticapps.net'];
 
-//app.use(cors({
-//    origin: allowedOrigins,
-//    credentials: true,
-// }));
+// allowed origins for cors 
+const allowedOrigins = ['https://salmon-mud-0a1019c10.5.azurestaticapps.net'];
 
+// enable cors 
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true, 
+}));
+
+// json parsing
 app.use(bodyParser.json());
 
-// Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
+// accessing static folder
 app.use(express.static(__dirname + '/static'))
-app.use(cors({ origin: '*' }))
 
 
 // this will handle the scores
