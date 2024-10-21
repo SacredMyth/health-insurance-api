@@ -26,7 +26,7 @@ app.post('/calculateRisk', (req, res) => {
     let riskScore = 0;
     const heightInMeters = (heightFeet * 12 + heightInches) * 0.0254;
     const bmi = weight / (heightInMeters * heightInMeters);
-
+    
     // Age Risk Calculation
     if (age < 30) {
         riskScore += 0;
