@@ -10,9 +10,13 @@ const port = process.env.PORT || 3000
 //    origin: allowedOrigins,
 //    credentials: true,
 // }));
+
+app.use(bodyParser.json());
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static'))
 app.use(cors({ origin: '*' }))
+
+
 
 // this will handle the scores
 app.post('/calculateRisk', (req, res) => {
