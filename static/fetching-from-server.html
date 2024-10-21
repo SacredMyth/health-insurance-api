@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Calculator</title>
+</head>
+<body>
+    <h1>Health Risk Calculator</h1>
+    <form id="risk-form">
+        <label for="age">Age:</label>
+        <input type="number" id="age" required>
+        
+        <label for="heightFeet">Height (Feet):</label>
+        <input type="number" id="heightFeet" required>
+        
+        <label for="heightInches">Height (Inches):</label>
+        <input type="number" id="heightInches" required>
+        
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" required>
+        
+        <label for="bloodPressure">Blood Pressure:</label>
+        <input type="number" id="bloodPressure" required>
+        
+        <label for="familyHistory">Family History (comma-separated):</label>
+        <input type="text" id="familyHistory" placeholder="e.g., diabetes, cancer">
+        
+        <button type="submit">Calculate Risk</button>
+    </form>
+    
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('risk-form').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Gather input values
+            const age = document.getElementById('age').value;
+            const heightFeet = document.getElementById('heightFeet').value;
+            const heightInches = document.getElementById('heightInches').value;
+            const weight = document.getElementById('weight').value;
+            const bloodPressure = document.getElementById('bloodPressure').value;
+            const familyHistory = document.getElementById('familyHistory').value.split(',').map(item => item.trim());
+
+            // Prepare the request body
+            const requestBody = {
+                age,
+                heightFeet,
+                heightInches,
+                weight,
+                bloodPressure,
+                familyHistory
+            };
+
+            try {
+                // Send the POST request to the /calculateRisk endpoint
+                const response = await fetch('https://salmon-mud-0a1019c10.5.azurestaticapps.net/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody),
+                });
+
+                // Check if the response is ok
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Parse the JSON response
+                const data = await response.json();
+
+                // Display the result
+                document.getElementById('result').innerHTML = `
+                    <h2>Risk Score: ${data.riskScore}</h2>
+                    <p>Risk Category: ${data.riskCategory}</p>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = 'An error occurred while calculating the risk.';
+            }
+        });
+    </script>
+</body>
+</html>
