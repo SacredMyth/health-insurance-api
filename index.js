@@ -11,6 +11,8 @@ const allowedOrigins = ['https://salmon-mud-0a1019c10.5.azurestaticapps.net'];
 app.use(cors({
     origin: allowedOrigins,
     credentials: true, 
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type,Authorization"
 }));
 
 app.options('*', cors());
