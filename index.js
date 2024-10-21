@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/static'))
 app.use(cors({ origin: '*' }))
 
+
 // this will handle the scores
 app.post('/calculateRisk', (req, res) => {
     const { age, heightFeet, heightInches, weight, bloodPressure, familyHistory } = req.body;
