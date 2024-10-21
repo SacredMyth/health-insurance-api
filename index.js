@@ -8,11 +8,12 @@ const port = process.env.PORT || 3000
 // allowed origins for cors 
 const allowedOrigins = ['https://salmon-mud-0a1019c10.5.azurestaticapps.net'];
 
-// enable cors 
 app.use(cors({
     origin: allowedOrigins,
     credentials: true, 
 }));
+
+app.options('*', cors());
 
 // json parsing
 app.use(bodyParser.json());
